@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -34,7 +33,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-       home: const MyHomePage(title: 'Home'),
+      home: const MyHomePage(title: 'Home'),
 
     );
   }
@@ -82,16 +81,50 @@ class _MyHomePageState extends State<MyHomePage> {
     // than having to individually change instances of widgets.
     var time = DateTime.now();
     return Scaffold(
-      appBar: AppBar(
-        // TRY THIS: Try changing the color here to a specific color (to
-        // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-        // change color while the other colors stay the same.
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body:  Text("kfnekf")
+        appBar: AppBar(
+          // TRY THIS: Try changing the color here to a specific color (to
+          // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
+          // change color while the other colors stay the same.
+          backgroundColor: Theme
+              .of(context)
+              .colorScheme
+              .inversePrimary,
+          // Here we take the value from the MyHomePage object that was created by
+          // the App.build method, and use it to set our appbar title.
+          title: Text(widget.title),
+        ),
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text('Select Data',
+                style: TextStyle(fontSize: 25),
+              ),
+              ElevatedButton(onPressed: () async {
+                DateTime? datePicked = await showDatePicker(context: context,
+                    initialDate: DateTime(2022),
+                    firstDate: DateTime(2021),
+                    lastDate: DateTime(2024));
+
+                if (datePicked != null) {
+                  print('Date Selected: ${datePicked.day} - ${datePicked
+                      .month} - ${datePicked.year}');
+                }
+              }, child: Text('Show')),
+              ElevatedButton(onPressed: () async {
+                 TimeOfDay? pickedTime = await showTimePicker(context: context,
+                    initialTime: TimeOfDay.now(),
+                    initialEntryMode: TimePickerEntryMode.input);
+
+                 if(pickedTime!=null)
+                   {
+                     print('Time Selected: ${pickedTime.hour}: ${pickedTime.minute}');
+                   }
+              }, child: Text('Show Time'))
+            ],
+
+          ),
+        )
     );
   }
 }

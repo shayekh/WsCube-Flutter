@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 void main() {
   runApp(const MyApp());
@@ -34,7 +33,6 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home: const MyHomePage(title: 'Home'),
-
     );
   }
 }
@@ -73,58 +71,128 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
-    var time = DateTime.now();
+    var arrColors = [
+      Colors.amber,
+      Colors.red,
+      Colors.blue,
+      Colors.lightGreenAccent,
+      Colors.grey
+    ];
+
     return Scaffold(
         appBar: AppBar(
           // TRY THIS: Try changing the color here to a specific color (to
           // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
           // change color while the other colors stay the same.
-          backgroundColor: Theme
-              .of(context)
-              .colorScheme
-              .inversePrimary,
+          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
           // Here we take the value from the MyHomePage object that was created by
           // the App.build method, and use it to set our appbar title.
           title: Text(widget.title),
         ),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text('Select Data',
-                style: TextStyle(fontSize: 25),
-              ),
-              ElevatedButton(onPressed: () async {
-                DateTime? datePicked = await showDatePicker(context: context,
-                    initialDate: DateTime(2022),
-                    firstDate: DateTime(2021),
-                    lastDate: DateTime(2024));
+        body:
+            // GridView.count(crossAxisCount: 2,
+            //     crossAxisSpacing: 3,
+            //     mainAxisSpacing: 5,
+            //     children: [
+            //   Padding(
+            //     padding: const EdgeInsets.all(8.0),
+            //     child: Container(color: arrColors[0],),
+            //   ),
+            //   Padding(
+            //     padding: const EdgeInsets.all(8.0),
+            //     child: Container(color: arrColors[1],),
+            //   ),
+            //   Padding(
+            //     padding: const EdgeInsets.all(8.0),
+            //     child: Container(color: arrColors[2],),
+            //   ),
+            //   Padding(
+            //     padding: const EdgeInsets.all(8.0),
+            //     child: Container(color: arrColors[3],),
+            //   ),
+            //   Padding(
+            //     padding: const EdgeInsets.all(8.0),
+            //     child: Container(color: arrColors[4],),
+            //   ),
+            //   Padding(
+            //     padding: const EdgeInsets.all(8.0),
+            //     child: Container(color: arrColors[1],),
+            //   ),
+            //   Padding(
+            //     padding: const EdgeInsets.all(8.0),
+            //     child: Container(color: arrColors[2],),
+            //   ),
+            //   Padding(
+            //     padding: const EdgeInsets.all(8.0),
+            //     child: Container(color: arrColors[3],),
+            //   ),
+            //
+            //
+            //
+            //
+            // ]),
 
-                if (datePicked != null) {
-                  print('Date Selected: ${datePicked.day} - ${datePicked
-                      .month} - ${datePicked.year}');
-                }
-              }, child: Text('Show')),
-              ElevatedButton(onPressed: () async {
-                 TimeOfDay? pickedTime = await showTimePicker(context: context,
-                    initialTime: TimeOfDay.now(),
-                    initialEntryMode: TimePickerEntryMode.input);
+            // GridView.extent(maxCrossAxisExtent: 100,
+            //
+            //     children: [
+            //       Padding(
+            //         padding: const EdgeInsets.all(8.0),
+            //         child: Container(color: arrColors[0],),
+            //       ),
+            //       Padding(
+            //         padding: const EdgeInsets.all(8.0),
+            //         child: Container(color: arrColors[1],),
+            //       ),
+            //       Padding(
+            //         padding: const EdgeInsets.all(8.0),
+            //         child: Container(color: arrColors[2],),
+            //       ),
+            //       Padding(
+            //         padding: const EdgeInsets.all(8.0),
+            //         child: Container(color: arrColors[3],),
+            //       ),
+            //       Padding(
+            //         padding: const EdgeInsets.all(8.0),
+            //         child: Container(color: arrColors[4],),
+            //       ),
+            //       Padding(
+            //         padding: const EdgeInsets.all(8.0),
+            //         child: Container(color: arrColors[1],),
+            //       ),
+            //       Padding(
+            //         padding: const EdgeInsets.all(8.0),
+            //         child: Container(color: arrColors[2],),
+            //       ),
+            //       Padding(
+            //         padding: const EdgeInsets.all(8.0),
+            //         child: Container(color: arrColors[3],),
+            //       ),
+            //
+            //
+            //
+            //
+            //     ]),
 
-                 if(pickedTime!=null)
-                   {
-                     print('Time Selected: ${pickedTime.hour}: ${pickedTime.minute}');
-                   }
-              }, child: Text('Show Time'))
-            ],
+            // GridView.builder(itemBuilder: (context, index) {
+            //   return Container(color: arrColors[index], );
+            // }, itemCount: arrColors.length, gridDelegate:  const SliverGridDelegateWithFixedCrossAxisCount(
+            //   crossAxisCount: 3,
+            //    mainAxisExtent: 100,
+            //   crossAxisSpacing: 5.0,
+            //   mainAxisSpacing: 5.0,
+            // ))
 
-          ),
-        )
-    );
+            GridView.builder(
+                itemBuilder: (context, index) {
+                  return Container(
+                    color: arrColors[index],
+                  );
+                },
+                itemCount: arrColors.length,
+                gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                  maxCrossAxisExtent: 100,
+                  crossAxisSpacing: 5.0,
+                  mainAxisSpacing: 5.0,
+                )));
   }
 }

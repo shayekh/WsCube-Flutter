@@ -31,27 +31,63 @@ class MyHomePage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Split Widget'),
       ),
-      body: Container(
-        child: Column(
-          children: [
-            Expanded(
-              flex: 2,
-              child: Container(
-                color: Colors.green,
-              ),
-            ),Expanded(
-              flex: 1,
-              child: Container(
-                color: Colors.blue,
+      body: Column(
+        children: [
+           const CatItems(),
+          Expanded(
+            flex: 1,
+            child: Container(
+              color: Colors.blue,
+              child: ListView.builder(
+                  itemBuilder: (context, index) => const Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: ListTile(
+                          leading: CircleAvatar(
+                            backgroundColor: Colors.red,
+                          ),
+                          title: Text('Name'),
+                          subtitle: Text('Mob No'),
+                          trailing: Icon(Icons.delete),
+                        ),
+                      )),
+            ),
+          ),
+          Expanded(
+            flex: 2,
+            child: Container(
+              color: Colors.grey,
+            ),
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class CatItems extends StatelessWidget {
+  const CatItems({super.key});
+
+  // const CatItems({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    //throw UnimplementedError();
+    return Expanded(
+      flex: 2,
+      child: Container(
+        color: Colors.green,
+        child: ListView.builder(
+          itemBuilder: (context, index) => const Padding(
+            padding: EdgeInsets.all(20.0),
+            child: SizedBox(
+              width: 100,
+              child: CircleAvatar(
+                backgroundColor: Colors.yellow,
               ),
             ),
-            Expanded(
-              flex: 2,
-              child: Container(
-                color: Colors.grey,
-              ),
-            )
-          ],
+          ),
+          itemCount: 10,
+          scrollDirection: Axis.horizontal,
         ),
       ),
     );
